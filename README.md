@@ -85,13 +85,6 @@ python3 asm2bin_v3.py sort_gcc.s --dump
 python3 asm2bin_v3.py sort_gcc.s --format coe -o imem.coe --dmem-out dmem.coe
 ```
 
-The assembler handles the full GCC -O1 instruction set: conditional execution (`strgt`, `suble`), pre/post-index addressing (`[Rn,#off]!`, `[Rn],#off`), PC-relative literal pool loads, register-shifted operands (`add r0,r0,r3,lsl #2`), `push`/`pop`, `bl`, `subs`, and separate `.text`/`.data` sections.
-
-**Bubble sort memory dump** — array `{323, 123, -455, 2, 98, 125, 10, 65, -56, 0}`:
-```
-Before: [323, 123, -455, 2, 98, 125, 10, 65, -56, 0]
-After:  [-455, -56, 0, 2, 10, 65, 98, 123, 125, 323]  ✓ sorted
-```
 
 ### GPU Toolchain (Team 2 — kernel/)
 
@@ -124,24 +117,6 @@ The ptx_parser.py output matches gpu_imem_rom.v exactly:
 
 ---
 
-## System Architecture
-
-```
-Host (lab9_joint_test_final.pl)
-        |  UDP register interface
-        v
-   fifo_top.v  (Lab 8 top-level, unchanged)
-   +------------------------------------------+
-   |   convertible_fifo  (256x72 BRAM)        |
-   |          +-----------+-----------+        |
-   |   arm_cpu_wrapper         gpu_net         |
-   |          |                    |           |
-   |   arm_pipeline          gpu_core_min      |
-   |   (4-thread ARM)        (7-state FSM)     |
-   +------------------------------------------+
-```
-
----
 
 ## Register Map
 
