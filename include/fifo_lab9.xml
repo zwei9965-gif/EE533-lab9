@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nf:module xmlns:nf="http://www.NetFPGA.org/NF2_register_system" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.NetFPGA.org/NF2_register_system NF2_register_system.xsd">
+	<nf:name>fifo</nf:name>
+	<nf:prefix>fifo</nf:prefix>
+	<nf:location>udp</nf:location>
+	<nf:description>Convertible FIFO Register Interface</nf:description>
+	<nf:blocksize>256</nf:blocksize>
+	<nf:registers>
+		<nf:register>
+			<nf:name>cmd</nf:name>
+			<nf:description>Command: [1:0]=mode [2]=reset [3]=ARM_start [4]=GPU_start [5]=GPU2_start</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>proc_addr</nf:name>
+			<nf:description>BRAM/GPU2-dmem address for host read/write</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>wdata_hi</nf:name>
+			<nf:description>Write data high: data[63:32]</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>wdata_lo</nf:name>
+			<nf:description>Write data low: data[31:0]</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>wdata_ctrl</nf:name>
+			<nf:description>Write ctrl byte and trigger write</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>rdata_sel</nf:name>
+			<nf:description>Read/write target: [0]=0 FIFO BRAM (default), 1=GPU2 data memory</nf:description>
+			<nf:type>generic_software32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>status</nf:name>
+			<nf:description>Status: [1:0]=mode, [2]=pkt_ready, [15:8]=pkt_len</nf:description>
+			<nf:type>generic_hardware32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>rdata_hi</nf:name>
+			<nf:description>Read data high: data[63:32] (FIFO BRAM or GPU2 dmem)</nf:description>
+			<nf:type>generic_hardware32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>rdata_lo</nf:name>
+			<nf:description>Read data low: data[31:0] (FIFO BRAM or GPU2 dmem)</nf:description>
+			<nf:type>generic_hardware32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>rdata_ctrl</nf:name>
+			<nf:description>Read ctrl: {24b0, ctrl[7:0]}</nf:description>
+			<nf:type>generic_hardware32</nf:type>
+		</nf:register>
+		<nf:register>
+			<nf:name>pointers</nf:name>
+			<nf:description>Status: [0]=arm_done [1]=arm_run [2]=gpu_done [3]=gpu_run [4]=gpu2_done [5]=gpu2_run [15:8]=tail [23:16]=head</nf:description>
+			<nf:type>generic_hardware32</nf:type>
+		</nf:register>
+	</nf:registers>
+</nf:module>
